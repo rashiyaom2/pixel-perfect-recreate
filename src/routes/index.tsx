@@ -4,7 +4,6 @@ import {
   BadgeDollarSign,
   BarChart3,
   Check,
-  Contactless,
   CreditCard,
   EyeOff,
   Landmark,
@@ -16,6 +15,7 @@ import {
   ShieldCheck,
   Sparkles,
   WalletCards,
+  Wifi,
 } from "lucide-react";
 import financeHand from "@/assets/fintech-hand.png";
 
@@ -48,7 +48,7 @@ function Logo() {
 function BankCard({ dark = false }: { dark?: boolean }) {
   return (
     <div className={dark ? "bank-card bank-card--dark" : "bank-card bank-card--lime"}>
-      <div className="bank-card__top"><span>{dark ? "VISA" : "Credit card number"}</span><Contactless size={24} /></div>
+      <div className="bank-card__top"><span>{dark ? "VISA" : "Credit card number"}</span><Wifi size={24} /></div>
       {!dark && <strong>5337&nbsp; 8682&nbsp; 4901&nbsp; 3294</strong>}
       {dark && <strong>5337&nbsp; 8682&nbsp; 4901&nbsp; 3294</strong>}
       <div className="bank-card__bottom"><span>{dark ? "Mason Smith" : "Bianca Taylor"}</span><span>{dark ? "10/31" : "03/24"}</span></div>
