@@ -46,6 +46,18 @@ function Logo() {
   return <a href="#top" className="logo" aria-label="Arina home">ARINA</a>;
 }
 
+function PartnerLogos() {
+  return (
+    <>
+      <strong className="visa">VISA</strong>
+      <strong className="mastercard" aria-label="Mastercard"><i /><i /></strong>
+      <strong>▧ PLAID</strong>
+      <strong className="serif-logo">Forbes</strong>
+      <strong>Deloitte.</strong>
+    </>
+  );
+}
+
 function BankCard({ dark = false }: { dark?: boolean }) {
   return (
     <div className={dark ? "bank-card bank-card--dark" : "bank-card bank-card--lime"}>
@@ -100,9 +112,14 @@ function Index() {
         </div>
       </section>
 
-      <section className="partners shell" aria-label="Partner companies">
+      <section className="partners" aria-label="Partner companies">
         <p>Partner Companies</p>
-        <div><strong className="visa">VISA</strong><strong className="mastercard"><i /><i /></strong><strong>▧ PLAID</strong><strong className="serif-logo">Forbes</strong><strong>Deloitte.</strong></div>
+        <div className="partners-marquee">
+          <div className="partners-track">
+            <div className="partners-group"><PartnerLogos /></div>
+            <div className="partners-group" aria-hidden="true"><PartnerLogos /></div>
+          </div>
+        </div>
       </section>
 
       <section className="features shell" id="features">
