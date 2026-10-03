@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -57,6 +58,18 @@ function BankCard({ dark = false }: { dark?: boolean }) {
 }
 
 function Index() {
+  useEffect(() => {
+    const selector = ".bank-card, .stats-card, .income-chip, .wallet-dot, .feature-grid article, .balance-panel";
+    const onMove = (e: PointerEvent) => {
+      const el = (e.target as Element | null)?.closest?.(selector) as HTMLElement | null;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
+    window.addEventListener("pointermove", onMove);
+    return () => window.removeEventListener("pointermove", onMove);
+  }, []);
   return (
     <main id="top">
       <header className="site-header shell">
