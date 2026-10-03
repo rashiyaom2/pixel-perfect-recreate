@@ -86,3 +86,68 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 540px) {
   .hero h1 { font-size: 39px; }.hero-copy > p { font-size: 12px; }.hero-visual { left: 50%; width: 580px; margin-left: -290px; transform: scale(.62); min-height: 315px; }.partners { padding-top: 0; }.partners p { margin-top: 0; }.partners .visa { font-size: 28px; }.mastercard i { width: 35px; height: 35px; }.features h2 { font-size: 26px; }.section-kicker small { max-width: 150px; text-align: right; }.desktop { display: none; }.feature-grid { gap: 10px; }.feature-grid article { height: 245px; }.feature-card { padding: 18px 14px; }.balance-panel { min-height: 250px; padding: 22px 18px; border-radius: 22px; }.balance-panel > strong { font-size: 25px; }.balance-actions span:nth-child(2),.balance-actions span:nth-child(3) { font-size: 0; width: 38px; padding: 0; justify-content: center; }.steps-copy h2 { font-size: 31px; }.pricing h2 { font-size: 34px; } footer .shell { padding-block: 30px; flex-direction: column; justify-content: center; gap: 12px; }
 }
+
+/* ===== Live hover: glassmorphism + motion ===== */
+.bank-card, .stats-card, .income-chip, .wallet-dot, .feature-grid article, .balance-panel {
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease, background-color .35s ease, border-color .35s ease, backdrop-filter .35s ease;
+}
+.topic-pills span, .balance-actions span, .balance-top span, .partners strong, .outline-pill {
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1), background-color .3s ease, border-color .3s ease, color .3s ease;
+}
+
+/* Glass sheen (::after) + cursor-tracked glow (::before) */
+.bank-card::before, .stats-card::before, .feature-grid article::before, .balance-panel::before,
+.bank-card::after, .stats-card::after, .income-chip::after, .wallet-dot::after, .feature-grid article::after, .balance-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.bank-card::before, .stats-card::before, .feature-grid article::before, .balance-panel::before {
+  z-index: 3;
+  background: radial-gradient(170px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .32), rgba(255, 255, 255, 0) 65%);
+}
+.bank-card::after, .stats-card::after, .income-chip::after, .wallet-dot::after, .feature-grid article::after, .balance-panel::after {
+  background: linear-gradient(115deg, rgba(255, 255, 255, .26), rgba(255, 255, 255, .05) 45%, rgba(255, 255, 255, .12));
+}
+
+/* Lift + frosted glass on hover */
+.bank-card:hover, .stats-card:hover, .feature-grid article:hover, .balance-panel:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), 0 26px 48px color-mix(in oklab, var(--foreground) 20%, transparent);
+}
+.bank-card:hover::before, .stats-card:hover::before, .feature-grid article:hover::before, .balance-panel:hover::before,
+.bank-card:hover::after, .stats-card:hover::after, .income-chip:hover::after, .wallet-dot:hover::after, .feature-grid article:hover::after, .balance-panel:hover::after {
+  opacity: 1;
+}
+.bank-card--lime:hover { background: linear-gradient(135deg, color-mix(in oklab, var(--lime-deep) 80%, transparent), color-mix(in oklab, var(--primary) 80%, transparent)); backdrop-filter: blur(14px) saturate(170%); }
+.bank-card--dark:hover { background: linear-gradient(135deg, color-mix(in oklab, var(--forest) 78%, transparent), color-mix(in oklab, var(--teal) 78%, transparent)); backdrop-filter: blur(14px) saturate(170%); }
+.feature-card.green:hover { background: color-mix(in oklab, var(--lime-deep) 82%, transparent); backdrop-filter: blur(14px) saturate(160%); }
+.feature-card.lime:hover { background: color-mix(in oklab, var(--primary) 82%, transparent); backdrop-filter: blur(14px) saturate(160%); }
+.feature-card.light-lime:hover { background: color-mix(in oklab, color-mix(in oklab, var(--primary) 72%, var(--background)) 82%, transparent); backdrop-filter: blur(14px) saturate(160%); }
+.balance-panel:hover { background: color-mix(in oklab, var(--ink-panel) 78%, transparent); backdrop-filter: blur(16px) saturate(160%); }
+.feature-image:hover img { transform: scale(1.07); }
+.feature-image img { transition: transform .5s cubic-bezier(.22, 1, .36, 1); }
+
+/* Keep card text above the sheen */
+.bank-card > *, .income-chip > *, .balance-panel > * { position: relative; z-index: 2; }
+.stats-card > span, .stats-card > small { position: relative; z-index: 2; }
+
+/* Small floating elements */
+.income-chip { transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease, background-color .35s ease, backdrop-filter .35s ease; }
+.income-chip:hover { transform: translateY(-4px); background: color-mix(in oklab, var(--background) 60%, transparent); backdrop-filter: blur(14px) saturate(170%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4), 0 14px 28px color-mix(in oklab, var(--foreground) 14%, transparent); }
+.wallet-dot { transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease; }
+.wallet-dot:hover { transform: scale(1.12); box-shadow: 0 0 0 6px color-mix(in oklab, var(--primary) 30%, transparent), 0 12px 24px color-mix(in oklab, var(--foreground) 18%, transparent); }
+
+/* Pills, chips and logos */
+.topic-pills span:hover { transform: translateY(-2px); border-color: color-mix(in oklab, var(--lime-deep) 60%, transparent); background: color-mix(in oklab, var(--primary) 25%, transparent); }
+.balance-actions span:hover, .balance-top span:hover { transform: translateY(-2px); border-color: color-mix(in oklab, var(--primary) 70%, transparent); background: color-mix(in oklab, var(--primary) 12%, transparent); }
+.balance-actions .balance-plus:hover { transform: translateY(-2px) rotate(90deg); background: var(--background); }
+.partners strong:hover { color: var(--foreground); transform: translateY(-3px); }
+.outline-pill:hover { background: color-mix(in oklab, var(--primary) 35%, transparent); transform: translateY(-2px); }
